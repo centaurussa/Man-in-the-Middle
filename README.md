@@ -8,9 +8,9 @@
 &nbsp;
 &nbsp;
 ## How to use it:
-* **By arguments**: 
+* **By arguments**:
     * `python mitm.py --gateway/-g IP --victim/-v IP`
-    
+
 * **By running the script**:
     * Handled by basic input
 
@@ -21,3 +21,4 @@
       * WinPcap
    * Linux:
       * Running the script as sudo
+   * Enabling IP forwarding on your system to act as a router
